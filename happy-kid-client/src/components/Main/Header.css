@@ -1,0 +1,29 @@
+.Header {
+  width: 70%;
+  margin: 0 auto;
+  background-color: white;
+  height: 250px;
+  display: flex;
+  padding-top:40px;
+  padding-bottom: 10px;
+  justify-content: space-around;
+}
+
+#logo-div {
+  width:25%;
+  height:80%;
+  background-color: white;
+}
+
+#images-carousel{
+  width:70%;
+  height:100%;
+  background-color: #25EACD;
+  border-radius: 10px;
+}
+
+#logo-div img {
+  max-height:100%;
+  width:auto;
+  overflow: hidden;
+}

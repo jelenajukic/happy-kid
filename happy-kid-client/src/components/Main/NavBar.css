@@ -1,0 +1,15 @@
+.NavBar {
+  width:70%;
+  background-color: #25EACD;
+  height: 50px;
+  margin: 0 auto;
+  text-align: right;
+  padding-right: 25px;
+  padding-top: 15px;
+  /* display: flex; */
+  
+}
+
+.NavBar span {
+  color: black;
+}
