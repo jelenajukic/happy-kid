@@ -24,7 +24,7 @@ export default class ChatApp extends Component {
       .then((response) => {
         console.log('ChatApp user:', response)
         chatManager = new ChatManager({
-          instanceLocator: process.env.REACT_APP_instanceLocator,
+          instanceLocator: "v1:us1:f2e42c61-c347-45fe-a756-ad689284eda6",
           userId: this.props.user,
           tokenProvider: new TokenProvider({ url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/f2e42c61-c347-45fe-a756-ad689284eda6/token' })
           //tokenProvider: new TokenProvider({ url: 'your.auth.url' })

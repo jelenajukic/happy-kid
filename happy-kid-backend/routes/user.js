@@ -6,8 +6,8 @@ const Notification = require("../models/Notification")
 const Chatkit = require("@pusher/chatkit-server");
 
 const chatkit = new Chatkit.default({
-  instanceLocator: process.env.instanceLocator,
-  key: process.env.key
+  instanceLocator: "v1:us1:f2e42c61-c347-45fe-a756-ad689284eda6",
+  key: "c0a264f0-734d-4265-9eb8-5a83c860daf1:rMS4Fr9t8owFwtHUHNfz13ws4cT+BB8jeiRUQICEeBk="
 });
 
 router.get("/messages", (req, res, next) => {
