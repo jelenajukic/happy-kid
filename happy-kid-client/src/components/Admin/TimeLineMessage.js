@@ -55,8 +55,9 @@ export default class TimeLineMessage extends Component {
 
   getSignedRequest = (file) => {
     const xhr = new XMLHttpRequest();
-    console.log("xhr is:", xhr)
-    xhr.open('GET', `http://localhost:5000/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+    console.log("xhr is:", xhr);
+    xhr.open('GET', `https://happy-kid.herokuapp.com/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+    // xhr.open('GET', `http://localhost:5000/sign-s3?file-name=${file.name}&file-type=${file.type}`);
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
