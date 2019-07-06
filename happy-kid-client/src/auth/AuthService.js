@@ -3,6 +3,7 @@ import axios from "axios";
 class AuthService {
   service = axios.create({
     // baseURL: "http://localhost:5000/auth",
+    baseURL: "https://happy-kid.herokuapp.com/auth",
     withCredentials: true
   });
 
