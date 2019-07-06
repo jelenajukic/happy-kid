@@ -2,8 +2,8 @@ import axios from "axios";
 
 class UserService {
   service = axios.create({
-    // baseURL: "http://localhost:5000/user",
-    baseURL:"https://happy-kid.herokuapp.com/",
+    baseURL: "http://localhost:5000/user",
+    // baseURL:"https://happy-kid.herokuapp.com/user",
     withCredentials: true
   });
 
