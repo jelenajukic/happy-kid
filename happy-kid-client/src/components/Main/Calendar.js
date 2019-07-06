@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import UserService from '../../user/UserService';
+import { Route } from 'react-router-dom';
+import Dates from './Dates.js'
+import "./Calendar.css"
 
 const moment = extendMoment(Moment);
 export default class Calendar extends Component {
@@ -10,10 +13,11 @@ export default class Calendar extends Component {
 
   state = {
     dateString: `${moment().format("YYYY")}-${moment().month(moment().format("MMMM")).format("MM")}`,
-    notification: "jjj",
+    notification: "",
     kids: this.props.kids,
     notificationDate: "",
-    //dateString : this.props.dateString
+    clickedNameId: "",
+    clickedName: ""
   }
 
   createDaysForMonth = () => {
@@ -26,7 +30,12 @@ export default class Calendar extends Component {
     let arrWithDays = ([...days].map(date => date.format('DD-ddd-MM-YYYY')));
     let calendarToRender = this.editArrWithDays(arrWithDays[0], arrWithDays);
     console.log("calendarToRender is:", calendarToRender)
-    return calendarToRender.map((date, index) => <div key={index} id={date} onClick={this.handleClickOnDate} style={{ width: 90, height: 90, backgroundColor: "pink" }}>{date.substr(0, 6)}</div>);
+    return calendarToRender.map((date, index) =>
+      <div
+        key={index} id={date}
+        onClick={this.handleClickOnDate}
+        style={{ width: 90, height: 90, backgroundColor: "#00A5CB", borderRadius: "4px", color: "#FFF", margin: "2px", cursor: "pointer" }}>{date.substr(0, 6)}
+      </div>);
   }
 
   createOptions = () => {
@@ -77,19 +86,15 @@ export default class Calendar extends Component {
   }
 
   handleLoad = () => {
-    // console.log("date-id is: ", `${moment(this.state.dateString).format('MMMM')}-${moment(this.state.dateString).format('YYYY')}`)
     document.getElementById(`${moment(this.state.dateString).format('MMMM')}-${moment(this.state.dateString).format('YYYY')}`).selected = true;
   }
-  // componentWillMount () {
-  //   document.getElementById(`${moment(this.state.dateString).format('MMMM')}-${moment(this.state.dateString).format('YYYY')}`).selected = true;
-  // }
+
   handleSelectEvent = (e) => {
     e.preventDefault();
     console.log(e.target.value)
     let dateString = e.target.value.split(" ");
     console.log(dateString);
     dateString[1] = moment().month(dateString[1]).format("MM")
-    // moment().month("July").format("MM")
     console.log(dateString.join("-"))
     this.setState({
       dateString: dateString.join("-")
@@ -117,7 +122,7 @@ export default class Calendar extends Component {
 
   handleClickOnDate = (e) => {
     console.log("notification Id is:", e.target.id);
-    let notificationDateValue = e.target.id.replace(e.target.id.substring(2,6),"")
+    let notificationDateValue = e.target.id.replace(e.target.id.substring(2, 6), "")
     this.setState({
       notificationDate: notificationDateValue
     }, () => console.log("notification in state:", this.state.notificationDate));
@@ -152,36 +157,49 @@ export default class Calendar extends Component {
   }
 
   createNotification = () => {
-    this.userService.createNotification(this.state.notification, this.state.notificationDate, this.props.kids[0]._id)
+    this.userService.createNotification(this.state.notification, this.state.notificationDate, this.state.clickedNameId)
+  }
+
+  handleOnClickName = (e) => {
+    e.preventDefault();
+    let clickedNameId = e.target.getAttribute("id");
+    let clickedName = e.target.getAttribute("name");
+    this.setState({ clickedNameId, clickedName })
+  }
+
+  renderKidsNames = () => {
+    return this.props.kids.map((kid, index) => <div key={index} onClick={this.handleOnClickName} id={kid._id} name={kid.kidName}>{kid.kidName}</div>)
   }
 
   componentDidMount() {
-    // window.addEventListener('load', this.handleLoad);
     console.log("kids calendar:", this.props.kids)
     this.handleLoad()
   }
 
   render() {
     return (
-      <div>
-        <div style={{ display: "flex" }} >
-          <button id="prevMonth" onClick={this.createNotification} value="prevMonth">Prev</button>
-          <select onChange={this.handleSelectEvent}>
-            {this.createOptions()}
-          </select>
-          <button id="nextMonth" onClick={this.handleClickEvent} value="nextMonth">Next</button>
+      <div className="Calendar" style={{ height: "550px", overflow: "scroll", display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", minHeight: "5%", width: "60%", margin: "30px auto", justifyContent: "space-around" }} >
+          <div style={{ display: "flex", width: "30%", justifyContent: "space-between" }}>
+            {this.renderKidsNames()}
+          </div>
+          <div style={{ width: "50%", display: "flex", justifyContent: "space-around" }}>
+            <button style={{ cursor: "pointer", border: "none", width: "60px", borderRadius: "4px", color: "#fff", backgroundColor: "#54008B" }} id="prevMonth" onClick={this.handleClickEvent} value="prevMonth">Prev</button>
+            <select style={{ border: "none", borderRadius: "4px", backgroundColor: "#FFE200" }} onChange={this.handleSelectEvent}>
+              {this.createOptions()}
+            </select>
+            <button style={{ cursor: "pointer", border: "none", width: "60px", borderRadius: "4px", color: "#fff", backgroundColor: "#54008B" }} id="nextMonth" onClick={this.handleClickEvent} value="nextMonth">Next</button>
+          </div>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {this.createDaysForMonth()}
-        </div>
+        <Route path="/" render={(props) => <Dates {...props} createDaysForMonth={this.createDaysForMonth} />} />
         <div id="popUpDiv" style={{ display: "none" }}>
           <form onSubmit={this.createNotification}>
             <p>Date: {this.state.notificationDate}</p>
-            <p>Notification for kid: {this.props.kids.length !== 0 ? this.props.kids[0].kidName : null}</p>
+            <p>Notification for kid: {this.props.kids.length !== 0 ? this.state.clickedName : null}</p>
             <label>Note:</label>
-            <input type="text" name="notification" onChange={this.handleNotification} />
+            <textarea name="notification" onChange={this.handleNotification} />
             <input type="submit" value="send"></input>
-            <div onClick={this.handleCancel} >cancel</div>
+            <div id="cancel" onClick={this.handleCancel} style={{ cursor: "pointer" }} >x</div>
           </form>
         </div>
       </div>

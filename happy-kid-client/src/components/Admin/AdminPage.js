@@ -4,22 +4,19 @@ import AdminService from '../../admin/AdminService';
 import { Link, Route, Switch } from 'react-router-dom';
 import NewChild from './NewChild';
 import EditParent from './EditParent';
-//import EditParentForm from './EditParentForm';
 import AdminMenu from './AdminMenu';
-//import Test from './Test'
 import Agenda from './Agenda'
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 import NavBar from "../Main/NavBar";
 import AuthService from '../../auth/AuthService';
+import ChatForAdmin from './ChatForAdmin'
+import "./AdminPage.css"
+import AdminHomePage from './AdminHomePage'
 
 const moment = extendMoment(Moment);
 export default class AdminPage extends Component {
 
-  style = {
-    display: "flex",
-    flexDirection: "column"
-  }
   state = {
     parents: [],
     dateString: moment().format("YYYY-MM-DD")
@@ -56,20 +53,19 @@ export default class AdminPage extends Component {
 
   render() {
     return (
-      <div style={this.style}>
+      <div className="AdminPage">
         <NavBar state={this.props.state} logOut={this.logOut} />
-        <div style={{display:"flex", width:"70%",margin: "0 auto", justifyContent:"space-between"}}>
+        <div style={{ display: "flex", width: "70%", height: "600px", margin: "100px auto", justifyContent: "space-between" }}>
           <AdminMenu />
-          <div style={{width:"80%"}}>
-            <h1>HELLO ADMIN</h1>
-            <div>
-              <Switch>
-                <Route path="/edit-parent" render={(props) => <EditParent state={this.state} />} />
-                <Route path="/new-kid" render={(props) => <NewChild />} />
-                <Route path="/send-message" render={(props) => <TimeLineMessage />} />
-                <Route path="/agenda" render={(props) => <Agenda dateString={this.state.dateString} />} />
-              </Switch>
-            </div>
+          <div style={{ width: "80%", height: "600px" }}>
+            <Switch>
+              <Route exact path="/" render={(props) => <AdminHomePage state={this.state} />} />
+              <Route path="/edit-parent" render={(props) => <EditParent state={this.state} />} />
+              <Route path="/new-kid" render={(props) => <NewChild />} />
+              <Route path="/send-message" render={(props) => <TimeLineMessage />} />
+              <Route path="/agenda" render={(props) => <Agenda dateString={this.state.dateString} />} />
+              <Route path="/chat" render={(props) => <ChatForAdmin user={this.props.state.user.username} />} />
+            </Switch>
           </div>
         </div>
       </div>

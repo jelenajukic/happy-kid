@@ -4,6 +4,7 @@ const Schema   = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  email: String,
   role:{type:String, default:"parent"},
   kidsID: [{
     type: Schema.ObjectId,

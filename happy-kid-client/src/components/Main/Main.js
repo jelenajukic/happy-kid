@@ -8,23 +8,14 @@ import MenuCard from './MenuCard'
 import "./Main.css"
 import TimeLineMessageUser from './TimeLineMessageUser';
 import Calendar from './Calendar'
-// import Moment from 'moment';
-// import { extendMoment } from 'moment-range';
+import ChatApp from './ChatApp'
+import FindUs from './FindUs'
 
-//const moment = extendMoment(Moment);
 export default class Main extends Component {
-
   state = {
     timeLineMessages: [],
     kids: [],
-    //dateString: `${moment().format("YYYY")}-${moment().month(moment().format("MMMM")).format("MM")}`,
   }
-
-  // updateStateInMain = (index) => {
-  //   this.setState({
-  //     timeLineCardOrder: index
-  //   })
-  // }
 
   authService = new AuthService();
   userService = new UserService();
@@ -38,62 +29,44 @@ export default class Main extends Component {
   }
 
   componentDidMount() {
-    console.log("I am in Main did mount")
-    console.log("User is:", this.props.state.user)
-
-    // this.userService.parentKids(this.props.state.user._id)
-    //     .then((result) => {
-    //       console.log("kids", result);
-    //       this.setState({
-    //         kids: result
-    //       })
-    //     })
     this.userService.messages(this.props.state.user._id)
       .then((result) => {
-        console.log("From service hope", result);
         this.setState({
           timeLineMessages: result
         })
       })
       .then(() => this.userService.parentKids(this.props.state.user._id)
         .then((result) => {
-          console.log("kids", result);
           this.setState({
             kids: result.kidsID
           })
         }))
-
   }
 
   render() {
     return (
-      <div>
+      <div className="Main">
         <NavBar state={this.props.state} logOut={this.logOut} />
         <Header />
-        <div className="Main">
+        <div className="content">
           <div className="menuCards">
-            <MenuCard imgURL="https://banner2.kisspng.com/20180730/cpx/kisspng-computer-icons-clip-art-bell-icon-free-download-5b5eb2ea181e35.1726661415329328420988.jpg" linkText="/" />
-            <MenuCard imgURL="https://banner2.kisspng.com/20180730/cpx/kisspng-computer-icons-clip-art-bell-icon-free-download-5b5eb2ea181e35.1726661415329328420988.jpg" linkText="/test" />
+            <MenuCard classList="fa fa-bell fa-3x" linkText="/" spanValue="time line" />
+            <MenuCard classList="fa fa-info fa-3x" linkText="/informus" spanValue="inform us" />
+            <MenuCard classList="fa fa-street-view fa-3x" linkText="/findus" spanValue="find us" />
+            <MenuCard classList="fab fa-rocketchat fa-3x" linkText="/chat" spanValue="bla-bla with us" />
           </div>
           <div className="centralWindow">
             <Switch>
-              <Route exact path='/test' render={(props) => <Calendar {...props} kids={this.state.kids} />} />
+              <Route path='/informus' render={(props) => <Calendar {...props} kids={this.state.kids} />} />
+              <Route path='/chat' render={(props) => <ChatApp {...props} user={this.props.state.user.username} />} />
+              <Route path='/findus' render={(props) => <FindUs {...props} user={this.props.state.user.username} />} />
               <Route
                 path="/"
                 render={this.state.timeLineMessages.length !== 0 ? (props) => <TimeLineMessageUser {...props} timeLineMessages={this.state.timeLineMessages} /> : null} />
             </Switch>
           </div>
-          <div className="news">
-            <Switch>
-              {/* <Route exact path="/news" component={News}></Route>
-              <Route exact path="/news" component={Content}></Route> */}
-            </Switch>
-          </div>
         </div>
-        <Switch>
-
-        </Switch>
-
+        <footer>Hello footer</footer>
       </div>
     )
   }

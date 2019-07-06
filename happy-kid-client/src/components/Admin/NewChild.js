@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
 import AdminService from '../../admin/AdminService';
-import { Link, Switch, Route } from 'react-router-dom'
-import TimeLineMessage from './TimeLineMessage';
-import AdminMenu from './AdminMenu';
-import EditParent from './EditParent';
-// import Test from './'
-
 
 export default class NewChild extends Component {
 
@@ -18,7 +12,13 @@ export default class NewChild extends Component {
   }
 
   style = {
-    display: "flex"
+    display: "flex",
+    flexDirection: "column",
+    height: "400px",
+    width: "30%",
+    justifyContent: "center",
+    margin: "0 auto",
+    alignItems: "center"
   }
 
   handleChangeEvent = (e) => {
@@ -39,17 +39,18 @@ export default class NewChild extends Component {
   render() {
     return (
 
-      <div style={this.style}>
-        <form onSubmit={this.addKidToDB}>
+      <fieldset>
+        <legend>Add a kid</legend>
+        <form onSubmit={this.addKidToDB} style={this.style}>
           <label>First Name</label>
-          <input type="text" name="kidName" onChange={this.handleChangeEvent} />
+          <input type="text" name="kidName" onChange={this.handleChangeEvent} placeholder="Type name" /><br></br>
           <label>LastName</label>
-          <input type="text" name="kidLastName" onChange={this.handleChangeEvent} />
+          <input type="text" name="kidLastName" onChange={this.handleChangeEvent} placeholder="Type lastName" /><br></br>
           <label>Group</label>
-          <input type="text" name="group" onChange={this.handleChangeEvent} />
+          <input type="text" name="group" onChange={this.handleChangeEvent} placeholder="Type group" /><br></br>
           <input type="submit" value="add-kid" />
         </form>
-      </div>
+      </fieldset>
     )
   }
 }

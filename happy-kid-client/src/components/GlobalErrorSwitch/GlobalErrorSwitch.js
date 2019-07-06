@@ -4,7 +4,6 @@ import Auth from "../Auth/Auth.js"
 import Main from "../Main/Main"
 import AuthService from '../../auth/AuthService';
 import AdminPage from "../Admin/AdminPage";
-import AdminApp from "../Admin/AdminApp"
 
 const Error = () => <div><h1>Error</h1></div>
 
@@ -25,6 +24,7 @@ export default class GlobalErrorSwitch extends Component {
   }
 
   previousLocation = this.props.location
+
   componentWillUpdate(nextProps) {
     const { location } = this.props;
     if (nextProps.history.action !== 'POP'
@@ -34,11 +34,9 @@ export default class GlobalErrorSwitch extends Component {
   }
 
   componentDidMount() {
-    console.log("I am in GS did mount")
     if (this.state.user === null) {
       this.service.currentUser()
         .then(response => {
-          console.log("GS did mount response", response)
           this.setState({
             user: response,
             isAuthenticated: true
@@ -65,7 +63,6 @@ export default class GlobalErrorSwitch extends Component {
           isError
             ? <Route component={Error} />
             : <Switch location={isError ? this.previousLocation : location}>
-              {/* <Route path="/login" render={(props) => <Auth state={this.state} />} /> */}
               <Route path="/signup" render={(props) => <Auth state={this.state} />} />
               <Route path="/" render={(props) =>
                 this.state.isAuthenticated ?

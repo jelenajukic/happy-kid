@@ -27,7 +27,7 @@ export default class TimeLineMessage extends Component {
     console.log(this.state.kids)
     let kidsWithDetailsArr = this.state.searchedKid
       .map((kid, index) =>
-        <div>
+        <div key={index}>
           <input type="radio" name="kidToSelect" value={kid._id} />
           <label>{kid.kidName}</label>
         </div>
@@ -36,16 +36,14 @@ export default class TimeLineMessage extends Component {
   }
 
   handleChangeEvent = (e) => {
-    console.log(e.target.files)
+    console.log('Files are', e.target.files)
     const files = e.target.files;
-    const file = files[0];
-    const file1 = files[1]
-    console.log("Files", file)
     if (files.length === 0) {
       return alert('No file selected.');
     }
-    this.getSignedRequest(file)
-    this.getSignedRequest(file1)
+    for (let i = 0; i < files.length; i++) {
+      this.getSignedRequest(files[i])
+    }
   }
 
   handleInputFormEvent = (e) => {
@@ -86,8 +84,8 @@ export default class TimeLineMessage extends Component {
           this.state.messageImages.push({
             src: url,
             thumbnail: url,
-            thumbnailWidth: 320,
-            thumbnailHeight: 174,
+            thumbnailWidth: 150,
+            thumbnailHeight: 150,
           })
           this.setState({
             messageImages: this.state.messageImages
@@ -114,7 +112,7 @@ export default class TimeLineMessage extends Component {
   }
 
   renderImages = () => {
-    let imagesToRender = this.state.messageImages.map((image, index) => <img key={index} src={image.src} alt={index} />)
+    let imagesToRender = this.state.messageImages.map((image, index) => <img key={index} src={image.src} alt={index} style={{ height: "100%", width: "auto", marginRight: "2px" }} />)
     return imagesToRender
   }
 
@@ -138,23 +136,33 @@ export default class TimeLineMessage extends Component {
 
   render() {
     return (
-      <div>
-        <form method="POST" onSubmit={this.saveMessage}>
-          <label>Search for a kid:</label>
-          <input type="text" name="kid" onChange={this.handleChangeKid} />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {this.makeListOfKids()}
+      <fieldset>
+        <legend>Send message for kid</legend>
+        <div style={{ height: "100%", width: "80%", margin: "0 auto", display: "flex", justifyContent: "space-between" }}>
+          <form method="POST" onSubmit={this.saveMessage} style={{ display: "flex", flexDirection: "column", height: "600px", justifyContent: "space-around", width: "40%" }}>
+            <div style={{ textAlign: "left" }}>
+              <label>Search for a kid:</label><br />
+              <input type="text" name="kid" onChange={this.handleChangeKid} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+              {this.makeListOfKids()}
+            </div>
+            <div style={{ textAlign: "left" }}>
+              <label>Message Title:</label>
+              <input type="text" name="messageTitle" onChange={this.handleInputFormEvent} /><br /><br />
+              <label>Message Text:</label><br />
+              <textarea name="messageBody" rows="10" cols="30" onChange={this.handleInputFormEvent} /><br />
+              <input type="submit" value="send message" />
+            </div>
+          </form>
+          <div style={{ display: "flex", flexDirection: "column", height: "350px", justifyContent: "space-around" }}>
+            <input type="file" id="file-input" onChange={this.handleChangeEvent} multiple="multiple" /><br />
+            <div style={{ display: "flex", height: "200px", flexWrap: "wrap" }}>
+              {this.state.messageImages.length === 0 ? null : this.renderImages()}
+            </div>
           </div>
-          <label>Message Title:</label>
-          <input type="text" name="messageTitle" onChange={this.handleInputFormEvent} />
-          <label>Message Text:</label>
-          <textarea name="messageBody" rows="10" cols="30" onChange={this.handleInputFormEvent}>...</textarea>
-          <input type="submit" value="send message" />
-        </form>
-        <input type="file" id="file-input" onChange={this.handleChangeEvent} multiple="multiple" />
-        <p id="status">Please select a file</p>
-        {this.state.messageImages.length === 0 ? null : this.renderImages()}
-      </div>
+        </div>
+      </fieldset>
     )
   }
 }

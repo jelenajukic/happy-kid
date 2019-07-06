@@ -7,8 +7,8 @@ export default class NavBar extends Component {
   render() {
     return (
       <div className="NavBar">
-        <span>{this.props.state.user.username}</span>
-        <Link to='/' onClick={this.props.logOut}>LogOut</Link>
+        <span>Welcome, {this.props.state.user.username}</span>
+        <Link to='/' onClick={this.props.logOut} id="logout">LogOut</Link>
       </div>
     )
   }

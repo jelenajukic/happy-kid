@@ -1,15 +1,28 @@
 .NavBar {
-  width:70%;
-  background-color: #25EACD;
-  height: 50px;
-  margin: 0 auto;
-  text-align: right;
-  padding-right: 25px;
-  padding-top: 15px;
-  /* display: flex; */
-  
+  background: #FFD91D;
+  display: flex;
+  justify-content:  flex-end;
+  align-items: center;
+  padding: 10px;
 }
 
 .NavBar span {
-  color: black;
+  margin-right: 50px;
+}
+
+.NavBar Link {
+  margin-right: 10px;
+}
+
+#logout {
+  text-decoration: none;
+  display: block;
+  background-color: #43008C;
+  padding:10px;
+  color:#fff;
+  border-radius: 10px;
+}
+
+#logout:hover {
+  background-color:#7BCB56;
 }

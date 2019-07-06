@@ -20,6 +20,7 @@ router.get("/users", (req, res, next) => {
 // })
 
 router.post("/add-message", (req, res, next) => {
+  console.log(req.body);
   TimeLineMessage.create(req.body)
     .then((result) => console.log("DB is updated"))
     .catch(error => console.log(error))

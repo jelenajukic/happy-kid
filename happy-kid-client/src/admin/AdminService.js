@@ -16,9 +16,9 @@ class AuthService {
       .then(response => response.data);
   }
 
-  addMessage = (kidID, images, messageBody, messageTitle) => {
+  addMessage = (kidID, images, messageTitle,  messageBody) => {
     return this.service
-      .post("/add-message", { kidID: kidID, images: images, messageBody: messageBody, messageTitle: messageTitle })
+      .post("/add-message", { kidID: kidID, images: images, messageTitle: messageTitle, messageBody: messageBody })
       .then(response => response.data);
   }
 

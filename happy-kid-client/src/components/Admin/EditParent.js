@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import AdminService from '../../admin/AdminService';
-import { Link, Switch, Route } from "react-router-dom";
-import EditParentForm from './EditParentForm';
-// import EditParentForm from './EditParentForm'
 
 let array = []
 export default class EditParent extends Component {
@@ -43,19 +40,11 @@ export default class EditParent extends Component {
     })
   }
 
-  // renderSearchForKids = () => {
-  //   document.getElementById("input-kid").innerHTML = `<label>Search for a kid:</label>
-  //   <input type="text" name="kid" onChange={this.handleChangeKid} />
-  //   <div style={{ display: "flex", flexDirection: "column" }}>
-  //    this.render (){t}
-  //   </div>`
-  // }
-
   makeListOfParents = () => {
     console.log(this.state.parents)
     let parentsWithDetailsArr = this.state.searchedParent
       .map((parent, index) =>
-        <div>
+        <div key={index}>
           <input type="radio" name="parentToEdit" value={parent._id} />
           <label>{parent.username}</label>
         </div>
@@ -67,7 +56,7 @@ export default class EditParent extends Component {
     console.log(this.state.parents)
     let kidsWithDetailsArr = this.state.searchedKid
       .map((kid, index) =>
-        <div>
+        <div key={index}>
           <input type="checkbox" name="kidToAdd" value={kid._id} />
           <label>{kid.kidName}</label>
         </div>
@@ -118,27 +107,32 @@ export default class EditParent extends Component {
     let arrayToSave = this.getChecked();
     this.service.editParent(arrayToSave[1], arrayToSave[0])
   }
-  
+
   render() {
     return (
       <div>
         <form onSubmit={this.editParent}>
-          <label>Search for a parent:</label>
-          <input type="text" name="parent" onChange={this.handleChange} />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {this.makeListOfParents()}
-            {/* <Route path="/edit-parent/:id" render={(props) => <EditParentForm {...props} />} /> */}
-          </div>
-          <div id="input-kid">
-            <label>Search for a kid:</label>
-            <input type="text" name="kid" onChange={this.handleChangeKid} />
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              {this.makeListOfKids()}
+          <fieldset>
+            <legend>Search for a parent:</legend><br></br>
+            <div className="input-info" >
+              <input type="text" name="parent" onChange={this.handleChange} placeholder="Type name" /><br />
+              <div style={{ display: "flex", flexDirection: "column", flexWrap: "wrap", padding: "5px" }}>
+                {this.makeListOfParents()}
+              </div>
             </div>
-          </div>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Search for a kid:</legend><br />
+            <div className="input-info">
+              <input type="text" name="kid" onChange={this.handleChangeKid} placeholder="Type name" />
+              <div style={{ padding: "5px", display: "flex", flexDirection: "column", }}>
+                {this.makeListOfKids()}
+              </div>
+            </div>
+          </fieldset><br />
           <input type="Submit" />
         </form>
-        <Route path="/edit-parent/:id" render={(props) => <EditParentForm {...props} />} />
       </div>
     )
   }

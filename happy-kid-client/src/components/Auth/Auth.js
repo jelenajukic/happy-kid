@@ -18,9 +18,8 @@ export default class Auth extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Auth">
         <Switch>
-          {/* <Route exact path='/login' render={(props) => <LogIn {...props} updateStateInAuth={this.updateStateInAuth} />} /> */}
           <Route exact path='/signup' render={(props) => <SignUp {...props} />} />
           <Route exact path='/' render={(props) => <LogIn {...props} updateStateInAuth={this.updateStateInAuth} />} />
         </Switch>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './SignUp.css';
+import './Auth.css';
 import Form from "./Form";
 import { Link } from "react-router-dom";
 import AuthService from '../../auth/AuthService';
@@ -20,17 +20,14 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <div className="LogIn">
-        <div className="LogInImgDiv"></div>
-        <div className="LogInFormDiv">
-          <h1>Lets start with registration!</h1>
-          <div className="LogInSignUpLinks">
-            <Link to="/"><span>LogIn</span></Link>
-            <Link to="/signup"><span>SignUp</span></Link>
-          </div>
-          <Form buttonText="SignUp" updateState={this.updateState} formAction={this.service.signup} />
+      <div className="AuthFormDiv">
+        <h1>Lets start with registration!</h1>
+        <div className="AuthLinks">
+          <Link style={{ textDecoration: 'none' }} to="/"><span>LogIn</span></Link>
+          <Link style={{ textDecoration: 'none' }} to="/signup"><span>SignUp</span></Link>
         </div>
-      </div >
+        <Form buttonText="SignUp" updateState={this.updateState} formAction={this.service.signup} />
+      </div>
     )
   }
 }

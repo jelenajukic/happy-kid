@@ -38,6 +38,7 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
   if (username === "" || password === "") {
     res.status(400).json({ message: "Username or password can't be empty. Please try again" })
     return;
@@ -52,7 +53,8 @@ router.post("/signup", (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      email: email
     });
 
     newUser.save()
