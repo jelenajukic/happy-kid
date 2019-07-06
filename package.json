@@ -1,0 +1,7 @@
+{
+  "name": "happy-kid-client",
+  "version": "0.1.0",
+  "scripts": {
+    "postinstall": "npm install --prefix happy-kid-backend && npm install --prefix happy-kid-client && npm-build --prefix happy-kid-client"
+  }
+}
