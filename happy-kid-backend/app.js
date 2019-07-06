@@ -1,19 +1,19 @@
 require('dotenv').config();
 
-const bodyParser   = require('body-parser');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const express      = require('express');
-const favicon      = require('serve-favicon');
-const hbs          = require('hbs');
-const mongoose     = require('mongoose');
-const logger       = require('morgan');
-const path         = require('path');
+const express = require('express');
+const favicon = require('serve-favicon');
+const hbs = require('hbs');
+const mongoose = require('mongoose');
+const logger = require('morgan');
+const path = require('path');
 
-const session    = require("express-session");
+const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
-const flash      = require("connect-flash");
+const flash = require("connect-flash");
 
-var aws = require('aws-sdk'); 
+var aws = require('aws-sdk');
 
 
 //CORS - port 5000 is used for backend and 3000 for react 
@@ -21,8 +21,8 @@ const cors = require('cors')
 
 mongoose
   //  .connect('mongodb://localhost/happy-kid-backend', {useNewUrlParser: true})
- .connect('mongodb+srv://happykid:happykid@cluster0-0o4hv.mongodb.net/happy-kid?retryWrites=true&w=majority'
-   , {useNewUrlParser: true})
+  .connect('mongodb+srv://happykid:happykid@cluster0-0o4hv.mongodb.net/happy-kid?retryWrites=true&w=majority'
+    , { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -44,11 +44,11 @@ app.use(cookieParser());
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
-      
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -64,18 +64,18 @@ aws.config.update({
 });
 
 const S3_BUCKET = process.env.S3_BUCKET;
-aws.config.region='us-east-1';
+aws.config.region = 'us-east-1';
 
 hbs.registerHelper('ifUndefined', (value, options) => {
   if (arguments.length < 2)
-      throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
-  if (typeof value !== undefined ) {
-      return options.inverse(this);
+    throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
+  if (typeof value !== undefined) {
+    return options.inverse(this);
   } else {
-      return options.fn(this);
+    return options.fn(this);
   }
 });
-  
+
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
@@ -86,7 +86,7 @@ app.use(session({
   secret: 'irongenerator',
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 app.use(flash());
 require('./passport')(app);
@@ -94,9 +94,10 @@ require('./passport')(app);
 //CORS setup
 app.use(cors({
   origin: ['http://localhost:3000'],
+  // origin:['https://happy-kid.herokuapp.com/'],
   credentials: true
 }))
-    
+
 const index = require('./routes/index');
 app.use('/', index);
 
@@ -122,7 +123,7 @@ app.get('/sign-s3', (req, res) => {
   };
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
+    if (err) {
       console.log(err);
       return res.end();
     }
@@ -134,6 +135,6 @@ app.get('/sign-s3', (req, res) => {
     res.end();
   });
 });
-      
+
 
 module.exports = app;

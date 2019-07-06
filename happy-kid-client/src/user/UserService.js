@@ -2,7 +2,7 @@ import axios from "axios";
 
 class UserService {
   service = axios.create({
-    baseURL: "http://localhost:5000/user",
+    // baseURL: "http://localhost:5000/user",
     withCredentials: true
   });
 
