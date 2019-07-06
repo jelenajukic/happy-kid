@@ -6,8 +6,8 @@ const moment = extendMoment(Moment);
 
 class AuthService {
   service = axios.create({
-   // baseURL: "http://localhost:5000/admin",
-    baseURL:"https://happy-kid.herokuapp.com/admin",
+    baseURL: "http://localhost:5000/admin",
+    // baseURL:"https://happy-kid.herokuapp.com/admin",
     withCredentials: true
   });
 
@@ -17,7 +17,7 @@ class AuthService {
       .then(response => response.data);
   }
 
-  addMessage = (kidID, images, messageTitle,  messageBody) => {
+  addMessage = (kidID, images, messageTitle, messageBody) => {
     return this.service
       .post("/add-message", { kidID: kidID, images: images, messageTitle: messageTitle, messageBody: messageBody })
       .then(response => response.data);
