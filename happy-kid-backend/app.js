@@ -21,8 +21,7 @@ const cors = require('cors')
 
 mongoose
   //  .connect('mongodb://localhost/happy-kid-backend', {useNewUrlParser: true})
-  .connect(process.env.mongoDB
-    , { useNewUrlParser: true })
+  .connect(process.env.mongoDB, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -92,11 +91,11 @@ app.use(flash());
 require('./passport')(app);
 
 //CORS setup
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  // origin:['https://happy-kid.herokuapp.com/'],
-  credentials: true
-}))
+// app.use(cors({
+//   origin: ['http://localhost:3000'],
+//   // origin:['https://happy-kid.herokuapp.com/'],
+//   credentials: true
+// }))
 
 const index = require('./routes/index');
 app.use('/', index);
