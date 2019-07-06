@@ -92,11 +92,11 @@ app.use(flash());
 require('./passport')(app);
 
 //CORS setup
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  // origin:['https://happy-kid.herokuapp.com/'],
-  credentials: true
-}))
+// app.use(cors({
+//   // origin: ['http://localhost:3000'],
+//   // origin:['https://happy-kid.herokuapp.com/'],
+//   credentials: true
+// }))
 
 const index = require('./routes/index');
 app.use('/', index);
