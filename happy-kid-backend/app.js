@@ -21,7 +21,7 @@ const cors = require('cors')
 
 mongoose
   //  .connect('mongodb://localhost/happy-kid-backend', {useNewUrlParser: true})
- .connect('mongodb+srv://happykid:happykid@cluster0-0o4hv.mongodb.net/test?retryWrites=true&w=majority'
+ .connect('mongodb+srv://happykid:happykid@cluster0-0o4hv.mongodb.net/happy-kid?retryWrites=true&w=majority'
    , {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
