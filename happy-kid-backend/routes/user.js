@@ -32,7 +32,7 @@ router.get("/parentKids", (req, res, next) => {
 router.post("/createNotification", (req, res, next) => {
   console.log(req.body)
   Notification.create(req.body)
-    .then((result) => console.log("DB Notification is updated"))
+    .then((result) => res.status(200).json(result))
     .catch(error => console.log(error))
 })
 

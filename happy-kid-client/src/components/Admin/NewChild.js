@@ -8,7 +8,8 @@ export default class NewChild extends Component {
   state = {
     kidName: "",
     kidLastName: "",
-    group: ""
+    group: "",
+    redirect: false
   }
 
   style = {
@@ -32,13 +33,19 @@ export default class NewChild extends Component {
   addKidToDB = (e) => {
     e.preventDefault()
     this.service.addKid(this.state.kidName, this.state.kidLastName, this.state.group)
-      .then(result => console.log(result))
+      .then(result => this.setState({redirect:true}))
       .catch(error => console.log(error))
   }
 
   render() {
-    return (
+    
+    if (this.state.redirect === true) {
+      window.history.replaceState(null, null, "/"); //it will clean history
+      window.location.reload();
+      // return <Redirect to='/' />
+    }
 
+    return (
       <fieldset>
         <legend>Add a kid</legend>
         <form onSubmit={this.addKidToDB} style={this.style}>

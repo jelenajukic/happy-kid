@@ -17,7 +17,8 @@ export default class Calendar extends Component {
     kids: this.props.kids,
     notificationDate: "",
     clickedNameId: "",
-    clickedName: ""
+    clickedName: "",
+    redirect: false,
   }
 
   createDaysForMonth = () => {
@@ -158,6 +159,7 @@ export default class Calendar extends Component {
 
   createNotification = () => {
     this.userService.createNotification(this.state.notification, this.state.notificationDate, this.state.clickedNameId)
+    .then (()=> this.setState({redirect:true}))
   }
 
   handleOnClickName = (e) => {
@@ -177,6 +179,13 @@ export default class Calendar extends Component {
   }
 
   render() {
+
+    if (this.state.redirect === true) {
+      window.history.replaceState(null, null, "/"); //it will clean history
+      window.location.reload();
+      // return <Redirect to='/' />
+    }
+    
     return (
       <div className="Calendar" style={{ height: "550px", overflow: "scroll", display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", minHeight: "5%", width: "60%", margin: "30px auto", justifyContent: "space-around" }} >
