@@ -8,7 +8,7 @@ Project has three parts:
 - GlobalSwitch component (which makes main role in routing inside application, nested routes).
 
 ## Instructions
-###.env file - backend
+#### .env file - backend
 - PORT=5000
 - ENV=development
 - S3_KEY=AWS S3
@@ -18,7 +18,7 @@ Project has three parts:
 - key= ChatKit
 - mongoDB = Atlas Cluster
 
-###.env file - client
+#### .env file - client
 - REACT_APP_instanceLocator=ChatKit
 - REACT_APP_tokenURL=ChatKit
 - key=ChatKit
