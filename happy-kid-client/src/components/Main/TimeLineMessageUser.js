@@ -71,7 +71,7 @@ export default class TimeLineMessageUser extends Component {
                 }
               })
             }
-          }}>{message[0].kid.kidName}</Link></li >) : null
+          }}>{message[0].kid.kidName}</Link></li >) : <h1>No messages in your message inbox</h1>
   }
 
   componentDidMount() {
