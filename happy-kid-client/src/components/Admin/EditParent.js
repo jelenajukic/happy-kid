@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AdminService from '../../admin/AdminService';
+import { Redirect } from "react-router-dom"
 
 let array = []
 export default class EditParent extends Component {
@@ -11,7 +12,7 @@ export default class EditParent extends Component {
     searchedKid: [],
     parentToEdit: [],
     kidToAdd: [],
-    message :""
+    redirect: false
   }
 
   service = new AdminService();
@@ -107,12 +108,16 @@ export default class EditParent extends Component {
   editParent = () => {
     let arrayToSave = this.getChecked();
     this.service.editParent(arrayToSave[1], arrayToSave[0])
-      .then(result => {console.log(result); this.setState({message:"Parent is connected with kid"})})
+      .then(result => { console.log(result); this.setState({ redirect: true }) })
       .catch(error => console.log(error))
   }
 
   render() {
+    if (this.state.redirect === true) {
+      return <Redirect to='/' />
+    }
     return (
+
       <div>
         <form onSubmit={this.editParent}>
           <fieldset>
