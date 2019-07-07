@@ -66,7 +66,7 @@ export default class Main extends Component {
             </Switch>
           </div>
         </div>
-        <footer>Hello footer</footer>
+        <footer>Made with love &#x10E6; HappyKid</footer>
       </div>
     )
   }

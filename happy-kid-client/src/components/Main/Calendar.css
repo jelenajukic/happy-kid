@@ -36,6 +36,9 @@
 }
 
 .childName {
+  line-height: 60px;
+  cursor:pointer;
+  border-radius: 4px;
   width: 60px;
   height: 30px;
   background-color: #7BCB56;
