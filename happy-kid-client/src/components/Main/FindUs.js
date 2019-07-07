@@ -56,9 +56,9 @@ class FindUs extends Component {
           />
         </GoogleMapReact>
         <div style={this.contactDetails}>
-          <span><b>Address:</b> Amsterdamweg 1 </span>
-          <span><b>e-mail:</b> happykid@gmail.com </span>
-          <span><b>Phone:</b> xxx-xx-xxx</span>
+          <span style={{color:'#FFE200'}}><b>Address:</b>Amsterdamweg 1</span>
+          <span style={{color:'#FFE200'}}><b>e-mail:</b>happykid@gmail.com</span>
+          <span style={{color:'#FFE200'}}><b>Phone:</b><br/>xxx-xx-xxx</span>
         </div>
       </div>
     );
