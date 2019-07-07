@@ -106,6 +106,7 @@ export default class EditParent extends Component {
   editParent = () => {
     let arrayToSave = this.getChecked();
     this.service.editParent(arrayToSave[1], arrayToSave[0])
+    this.props.history.push('/')
   }
 
   render() {
