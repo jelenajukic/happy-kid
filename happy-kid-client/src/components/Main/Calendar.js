@@ -170,7 +170,7 @@ export default class Calendar extends Component {
   }
 
   renderKidsNames = () => {
-    return this.props.kids.map((kid, index) => <div key={index} onClick={this.handleOnClickName} id={kid._id} name={kid.kidName}>{kid.kidName}</div>)
+    return this.props.kids.map((kid, index) => <div className="childName" key={index} onClick={this.handleOnClickName} id={kid._id} name={kid.kidName}>{kid.kidName}</div>)
   }
 
   componentDidMount() {
