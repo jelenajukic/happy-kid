@@ -4,14 +4,14 @@ import GoogleMapReact from 'google-map-react';
 
 
 // const AnyReactComponent = ({ text }) => <div style={this.marker}><img style={this.markerIMG} src="../../logo.jpg" alt="marker" /></div>;
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const MarkerComponent = ({ text }) => <div>{text}</div>;
 
 class FindUs extends Component {
   
   static defaultProps = {
     center: {
-      lat: 52.3580,
-      lng: 4.8686
+      lat: 59.95,
+      lng: 30.33
     },
     zoom: 11
   };
@@ -43,13 +43,13 @@ class FindUs extends Component {
     console.log(process.env.key)
     return (
 
-      <div style={{ height: '50vh', width: '50%', display: "flex" }}>
-        <GoogleMapReact
+      <div style={{ height: '50vh', width: '70%', display: "flex", margin:"0 auto"  }}>
+        <GoogleMapReact 
           bootstrapURLKeys={{ key: "AIzaSyBOKG2gf34JUOyAbRwm7e85EtuHCqN5FdA" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
+          <MarkerComponent
             lat={59.955413}
             lng={30.337844}
             text="Happy-Kid"
