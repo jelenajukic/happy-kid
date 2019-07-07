@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 
 
 // const AnyReactComponent = ({ text }) => <div style={this.marker}><img style={this.markerIMG} src="../../logo.jpg" alt="marker" /></div>;
-const MarkerComponent = ({ text }) => <div style={{ color: "red" }}>{text}</div>;
+const MarkerComponent = ({ text }) => <div style={{ color: "red", fontSize:"15px", fontWeight:"bold" }}>{text}</div>;
 
 class FindUs extends Component {
 
