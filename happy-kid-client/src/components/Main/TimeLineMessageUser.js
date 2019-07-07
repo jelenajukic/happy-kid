@@ -13,7 +13,7 @@ export default class TimeLineMessageUser extends Component {
 
   //this function makes links to kid's time-line messages
   renderKidsLink = () => {
-    return this.state.timeLineMessages[0].length !== 0 ? //if first kid do not have message we will not see messages of other kids
+    return this.state.timeLineMessages.length !== 0 ? //if first kid do not have message we will not see messages of other kids
       this.state.timeLineMessages.map((message, index) =>
         <li key={index} style={{ textDecoration: "none" }}><Link
           id={message[0].kid._id}
