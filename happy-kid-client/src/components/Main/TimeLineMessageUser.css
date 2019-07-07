@@ -1,3 +1,7 @@
 .TimeLineMessageUser {
   background-color: #fff;
 }
+
+.TimeLineMessageUser h1 {
+  color: #54008B;
+}
