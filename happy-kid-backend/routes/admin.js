@@ -29,7 +29,7 @@ router.post("/add-message", (req, res, next) => {
 router.post("/add-kid", (req, res, next) => {
   console.log(req.body)
   Kid.create(req.body)
-    .then((result) => console.log("DB is updated"))
+    .then((result) => res.status(200).json(result))
     .catch(error => console.log(error))
 })
 
