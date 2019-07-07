@@ -3,9 +3,11 @@ import GoogleMapReact from 'google-map-react';
 
 
 
-const AnyReactComponent = ({ text }) => <div style={this.marker}><img style={this.markerIMG} src="../../logo.jpg" alt="marker" /></div>;
+// const AnyReactComponent = ({ text }) => <div style={this.marker}><img style={this.markerIMG} src="../../logo.jpg" alt="marker" /></div>;
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class FindUs extends Component {
+  
   static defaultProps = {
     center: {
       lat: 52.3580,
