@@ -9,7 +9,8 @@ export default class TimeLineMessage extends Component {
       kids: [],
       searchedKid: [],
       messageTitle: "",
-      messageBody: ""
+      messageBody: "",
+      redirect: false
     }
   }
 
@@ -131,11 +132,17 @@ export default class TimeLineMessage extends Component {
     e.preventDefault();
     let arrayToSave = this.getChecked();
     this.service.addMessage(arrayToSave[0], this.state.messageImages, this.state.messageTitle, this.state.messageBody)
-      .then(result => console.log(result))
+      .then(result => this.setState({ redirect: true }))
       .catch(error => console.log(error))
   }
 
   render() {
+
+    if (this.state.redirect === true) {
+      window.history.replaceState(null, null, "/"); //it will clean history
+      window.location.reload();
+    }
+    
     return (
       <fieldset>
         <legend>Send message for kid</legend>
