@@ -7,7 +7,7 @@ import GoogleMapReact from 'google-map-react';
 const MarkerComponent = ({ text }) => <div>{text}</div>;
 
 class FindUs extends Component {
-  
+
   static defaultProps = {
     center: {
       lat: 59.95,
@@ -43,8 +43,8 @@ class FindUs extends Component {
     console.log(process.env.key)
     return (
 
-      <div style={{ height: '50vh', width: '70%', display: "flex", margin:"0 auto"  }}>
-        <GoogleMapReact 
+      <div style={{ height: '50vh', width: '70%', display: "flex", margin: "0 auto" }}>
+        <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBOKG2gf34JUOyAbRwm7e85EtuHCqN5FdA" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
@@ -56,9 +56,9 @@ class FindUs extends Component {
           />
         </GoogleMapReact>
         <div style={this.contactDetails}>
-          <span style={{color:'#FFE200'}}><b>Address:</b>Amsterdamweg 1</span>
-          <span style={{color:'#FFE200'}}><b>e-mail:</b>happykid@gmail.com</span>
-          <span style={{color:'#FFE200'}}><b>Phone:</b><br/>xxx-xx-xxx</span>
+          <span style={{color: "#FFE200"}}>Address: </span><span>Amsterdamweg 1</span>
+          <span style={{color: "#FFE200"}}>email: </span><span>happykid@gmail.com</span>
+          <span style={{color: "#FFE200"}}>phone: </span><span>xxx-xxx-xx</span>
         </div>
       </div>
     );
