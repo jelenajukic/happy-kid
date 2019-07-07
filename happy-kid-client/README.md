@@ -8,20 +8,20 @@ Project has three parts:
 - GlobalSwitch component (which makes main role in routing inside application, nested routes).
 
 ## Instructions
-.env file - backend
-PORT=5000
-ENV=development
-S3_KEY=AWS S3
-S3_SECRET=AWS S3
-S3_BUCKET=AWS S3
-instanceLocator= ChatKit
-key= ChatKit
-mongoDB = Atlas Cluster
+####.env file - backend
+- PORT=5000
+- ENV=development
+- S3_KEY=AWS S3
+- S3_SECRET=AWS S3
+- S3_BUCKET=AWS S3
+- instanceLocator= ChatKit
+- key= ChatKit
+- mongoDB = Atlas Cluster
 
-.env file - client
-REACT_APP_instanceLocator=ChatKit
-REACT_APP_tokenURL=ChatKit
-key=ChatKit
+####.env file - client
+- REACT_APP_instanceLocator=ChatKit
+- REACT_APP_tokenURL=ChatKit
+- key=ChatKit
 
 ### Functionalities
 - InfiniteScroll in TimeLineMessagesKid (React Component)
