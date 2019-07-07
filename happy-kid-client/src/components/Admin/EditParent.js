@@ -10,7 +10,8 @@ export default class EditParent extends Component {
     kids: [],
     searchedKid: [],
     parentToEdit: [],
-    kidToAdd: []
+    kidToAdd: [],
+    message :""
   }
 
   service = new AdminService();
@@ -106,7 +107,7 @@ export default class EditParent extends Component {
   editParent = () => {
     let arrayToSave = this.getChecked();
     this.service.editParent(arrayToSave[1], arrayToSave[0])
-      .then(result => console.log('result in edit is:', result))
+      .then(result => {console.log(result); this.setState({message:"Parent is connected with kid"})})
       .catch(error => console.log(error))
   }
 
@@ -134,6 +135,7 @@ export default class EditParent extends Component {
             </div>
           </fieldset><br />
           <input type="Submit" />
+          <div>{this.state.message}</div>
         </form>
       </div>
     )
