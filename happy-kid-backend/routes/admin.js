@@ -52,9 +52,16 @@ router.get("/kids", (req, res, next) => {
 router.post("/editParent", (req, res, next) => {
   console.log(req.body)
   User.findOneAndUpdate({ _id: req.body.parentID[0] }, { $addToSet: { kidsID: req.body.kidIDs } }, { new: true })
-    .then((result) => console.log("DB is updated"))
+    .then((result) => res.status(200).json(result))
     .catch(error => console.log(error))
 })
+
+// router.get("/editParent", (req, res, next) => {
+//   console.log(req.body)
+//   User.findOneAndUpdate({ _id: req.body.parentID[0] }, { $addToSet: { kidsID: req.body.kidIDs } }, { new: true })
+//     .then((result) => console.log("DB is updated"))
+//     .catch(error => console.log(error))
+// })
 
 router.get("/agenda", (req, res, next) => {
   Notification.find({ date: req.query.date.toString() }).populate('kidID')
