@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 
 
 // const AnyReactComponent = ({ text }) => <div style={this.marker}><img style={this.markerIMG} src="../../logo.jpg" alt="marker" /></div>;
-const MarkerComponent = ({ text }) => <div>{text}</div>;
+const MarkerComponent = ({ text }) => <div style={{ color: "red" }}>{text}</div>;
 
 class FindUs extends Component {
 
@@ -56,9 +56,9 @@ class FindUs extends Component {
           />
         </GoogleMapReact>
         <div style={this.contactDetails}>
-          <span style={{color: "#FFE200"}}>Address: </span><span>Amsterdamweg 1</span>
-          <span style={{color: "#FFE200"}}>email: </span><span>happykid@gmail.com</span>
-          <span style={{color: "#FFE200"}}>phone: </span><span>xxx-xxx-xx</span>
+          <span style={{ fontWeight: "bold" }}>Address: </span><span>Amsterdamweg 1</span>
+          <span style={{ fontWeight: "bold" }}>email: </span><span>happykid@gmail.com</span>
+          <span style={{ fontWeight: "bold" }}>phone: </span><span>xxx-xxx-xx</span>
         </div>
       </div>
     );
