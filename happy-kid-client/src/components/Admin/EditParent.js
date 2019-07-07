@@ -114,7 +114,9 @@ export default class EditParent extends Component {
 
   render() {
     if (this.state.redirect === true) {
-      return <Redirect to='/' />
+      window.history.replaceState(null, null, "/"); //it will clean history
+      window.location.reload();
+      // return <Redirect to='/' />
     }
     return (
 
