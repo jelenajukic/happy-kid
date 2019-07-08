@@ -16,7 +16,7 @@ export default class AdminMenu extends Component {
       <div style={this.style}>
         <AdminMenuButton value="HOME" linkTo="/" />
         <AdminMenuButton value="ADD KID" linkTo="/new-kid" />
-        <AdminMenuButton value="EDIT PARENT" linkTo="/edit-parent" />
+        <AdminMenuButton value="CONNECT" linkTo="/edit-parent" />
         <AdminMenuButton value="SEND MESSAGE" linkTo="/send-message" />
         <AdminMenuButton value="AGENDA" linkTo="/agenda" />
         <AdminMenuButton value="CHAT" linkTo="/chat" />
