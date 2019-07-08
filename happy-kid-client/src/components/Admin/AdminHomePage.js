@@ -4,7 +4,7 @@ export default class AdminHomePage extends Component {
   render() {
     return (
       <div>
-        <fieldset style={{height: "400px", display: "flex", flexDirection:"column", alignItems: "flex-start", padding: "20px", justifyContent:"space-around"}}>
+        <fieldset style={{height: "400px", display: "flex", flexDirection:"column"}}>
           <legend>HappyKid &#x10E6;</legend>
           <h2>Hello, let's do some nice things for our parents and kids  &#x10E6;</h2>
           <ul style={{ listStyleType: "none"}}>
