@@ -57,7 +57,7 @@ export default class SendMessageForm extends Component {
   render() {
     return (
       <div>
-        <form className="send-message-form" onSubmit={this.handleSubmit}>
+        <form className="send-message-form" onSubmit={this.handleSubmit} autoComplete="off">
           <input id="type-message"
             placeholder="Type the message and press ENTER"
             type="text"
